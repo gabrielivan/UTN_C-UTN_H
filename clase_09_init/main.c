@@ -44,19 +44,46 @@
 */
 int main()
 {
+    int opcionMenu;
     int indiceVacio;
-
+    int idBuscado,indiceEncontrado;
     Producto arrayProducto[CANTIDAD_PRODUCTO];
-
     producto_initArrayProducto(arrayProducto,CANTIDAD_PRODUCTO,1);
+    while(opcionMenu != 4)
+    {
+         opcionMenu = getInt("\n1 - cargar \n2 - imprimir \n3 - buscar por id \n4 - Salir\n");
+         switch(opcionMenu)
+         {
+            case 1:
+                indiceVacio = producto_buscarIndiceArray(arrayProducto,CANTIDAD_PRODUCTO);
+                producto_altaArray(arrayProducto,indiceVacio,CANTIDAD_PRODUCTO);
+                break;
 
-    producto_altaArray(arrayProducto,2,CANTIDAD_PRODUCTO);
+            case 2:
+               producto_mostrarArrayCompleto(arrayProducto,CANTIDAD_PRODUCTO);
+            break;
 
-    producto_mostrarArray(arrayProducto,2,CANTIDAD_PRODUCTO);
+            case 3:
+                    idBuscado = getInt("\ningrese id:");
+                    indiceEncontrado = producto_buscarIndiceArrayById(arrayProducto,idBuscado,CANTIDAD_PRODUCTO);
+                    if(indiceEncontrado != -1)
+                    {
+                        printf("El indice del id %d es %d", idBuscado, indiceEncontrado);
+                    }
+                    else
+                    {
+                        printf("No se encontro");
+                    }
 
-    indiceVacio = producto_buscarIndiceArray(arrayProducto,CANTIDAD_PRODUCTO);
+                break;
 
-    printf("\n El indice vacio es: %d",indiceVacio);
+            case 4: printf("Adios");
+            break;
+
+            default: printf("error ingrese una opcion valida");
+         }
+    }
+
 
     return 0;
 }

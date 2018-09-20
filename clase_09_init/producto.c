@@ -31,6 +31,15 @@ int producto_altaArray(Producto arrayProducto[],int indice,int size)
             strncpy(arrayProducto[indice].nombre,auxNombre,50);
             strncpy(arrayProducto[indice].descripcion,auxDescripcion,100);
             arrayProducto[indice].precio = auxPrecio;
+            arrayProducto[indice].isEmpty = 0;
+            if(indice > 0)
+            {
+                arrayProducto[indice].id =  (arrayProducto[indice - 1].id) + 1;
+            }
+            else
+            {
+                arrayProducto[indice].id =  1;
+            }
 
             retorno = 0;
         }
@@ -45,6 +54,7 @@ int producto_mostrarArray(Producto arrayProducto[],int indice,int size)
 
     if(arrayProducto != NULL && size > 0 && indice >= 0 && indice < size)
     {
+        printf("\n El ID del producto es: %d",arrayProducto[indice].id);
         printf("\n El nombre del producto es: %s",arrayProducto[indice].nombre);
         printf("\n La descripcion del producto es: %s",arrayProducto[indice].descripcion);
         printf("\n El precio del producto es: %.2f",arrayProducto[indice].precio);
@@ -54,17 +64,40 @@ int producto_mostrarArray(Producto arrayProducto[],int indice,int size)
     return retorno;
 }
 
+void producto_mostrarArrayCompleto(Producto arrayProducto[],int size)
+{
+    for(int i  = 0; i < size; i++)
+    {
+        if(!arrayProducto[i].isEmpty)
+        {
+            producto_mostrarArray(arrayProducto,i,size);
+        }
+    }
+}
+
 int producto_buscarIndiceArray(Producto arrayProducto[],int size)
 {
     int i;
-    int indiceVacio;
 
     for(i=0;i < size; i++)
     {
         if(arrayProducto[i].isEmpty == 1)
         {
-            indiceVacio = i;
-            return indiceVacio;
+            return i;
+        }
+
+    }
+    return -1;
+}
+
+int producto_buscarIndiceArrayById(Producto arrayProducto[],int id, int size)
+{
+    int i;
+    for(i=0;i < size; i++)
+    {
+        if(arrayProducto[i].id == id)
+        {
+            return i;
         }
 
     }

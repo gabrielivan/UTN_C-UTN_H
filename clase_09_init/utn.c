@@ -1,4 +1,5 @@
-#include <stdio_ext.h>
+//#include <stdio_ext.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -63,7 +64,8 @@ static int getString(char* pBuffer, int limite)
     int len;
     if(pBuffer != NULL && limite > 0)
     {
-        __fpurge(stdin);
+        fflush(stdin);
+        //__fpurge(stdin);
         fgets(bufferStr,limite,stdin);
         len = strlen(bufferStr);
         if(len != limite-1 ||  bufferStr[limite-2] == '\n')
@@ -132,7 +134,8 @@ int utn_getNumeroConComa(float* pResultado,
         validado = 1;
         tienePunto = 0;
         tieneMenos = 0;
-        __fpurge(stdin);
+        fflush(stdin);
+        //__fpurge(stdin);
         fgets(stringIngresado, STRINGLEN, stdin);//pido un string con limite de caracters (STRINGLEN)
 
         for (int j=0; j<strlen(stringIngresado)-1; j++)//recorro caracter por caracter
