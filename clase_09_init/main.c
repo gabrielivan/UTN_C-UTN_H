@@ -1,3 +1,4 @@
+#include <stdio_ext.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,38 +21,38 @@
 5)  Realizar una funcion que me devuelva el indice de un item vacio (sin cargar).
 
 
-3) Realizar un programa con un menu de dos opciones:
+6) Realizar un programa con un menu de dos opciones:
     a) Cargar un producto
     b) Imprimir lista productos
 
 
-4)  Agregar al tipo de dato el campo ID que represente un identificador unico.
+7)  Agregar al tipo de dato el campo ID que represente un identificador unico.
     Modificar el codigo anterior para que el ID se genere automaticamente. Se debera cargar el ID automaticamente al cargar un producto, y se debera imprimir al imprimir la lista.
 
-5)  Realizar una funcion que reciba el array y un ID, y me devuelva el indice
+8)  Realizar una funcion que reciba el array y un ID, y me devuelva el indice
     del item con dicho ID.
 
-6)  Realizar una funcion que reciba el array, un indice, y le permita al usuario
+9)  Realizar una funcion que reciba el array, un indice, y le permita al usuario
     modificar los campos nombre y precio del item del array en la posicion especificada por el indice.
 
 
-7)  Agregar una opcion en el menu. "Editar producto" que pida al usuario el ID del
+10)  Agregar una opcion en el menu. "Editar producto" que pida al usuario el ID del
     mismo y le permita cambiar el nombre y el precio.
 
-8)  Agregar una opcion en el menu "Borrar producto" que pida al usuario el ID del
+11)  Agregar una opcion en el menu "Borrar producto" que pida al usuario el ID del
     mismo.
 
 */
 int main()
 {
-    int opcionMenu;
+    int opcionMenu = 1;
     int indiceVacio;
     int idBuscado,indiceEncontrado;
     Producto arrayProducto[CANTIDAD_PRODUCTO];
     producto_initArrayProducto(arrayProducto,CANTIDAD_PRODUCTO,1);
-    while(opcionMenu != 4)
+    while(opcionMenu >= 1 && opcionMenu <=5)
     {
-         opcionMenu = getInt("\n1 - cargar \n2 - imprimir \n3 - buscar por id \n4 - Salir\n");
+         opcionMenu = getInt("\n1 - cargar \n2 - imprimir \n3 - modificar \n4 - borrar  \n5 - salir\n");
          switch(opcionMenu)
          {
             case 1:
@@ -75,9 +76,29 @@ int main()
                         printf("No se encontro");
                     }
 
+                    producto_modificar(arrayProducto,indiceEncontrado,CANTIDAD_PRODUCTO);
+
                 break;
 
-            case 4: printf("Adios");
+            case 4:
+
+                    idBuscado = getInt("\ningrese id:");
+                    indiceEncontrado = producto_buscarIndiceArrayById(arrayProducto,idBuscado,CANTIDAD_PRODUCTO);
+                    if(indiceEncontrado != -1)
+                    {
+                        printf("El indice del id %d es %d", idBuscado, indiceEncontrado);
+                    }
+                    else
+                    {
+                        printf("No se encontro");
+                    }
+
+                    producto_bajaLogica(arrayProducto,indiceEncontrado,CANTIDAD_PRODUCTO);
+
+                break;
+
+
+            case 5: printf("Adios");
             break;
 
             default: printf("error ingrese una opcion valida");

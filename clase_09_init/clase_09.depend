@@ -6,6 +6,8 @@
 	"utn.h"
 	"producto.h"
 
+1537414381 h"
+
 1537314897 /home/alumno/Documentos/clase_09_init/utn.h
 
 1537318991 /home/alumno/Documentos/clase_09_init/producto.h
@@ -16,6 +18,8 @@
 	<stdlib.h>
 	<ctype.h>
 	"utn.h"
+
+1537412983 
 
 1537318814 source:/home/alumno/Documentos/clase_09_init/producto.c
 	<stdio.h>
@@ -43,6 +47,33 @@
 	"utn.h"
 
 1537414381 source:c:\users\chris_x4urr38\desktop\utn_c-utn_h-master\clase_09_init\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"producto.h"
+
+1537481982 source:/home/alumno/Documentos/UTN_C-UTN_H-master/clase_09_init/producto.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"producto.h"
+
+1537416371 /home/alumno/Documentos/UTN_C-UTN_H-master/clase_09_init/utn.h
+
+1537481883 /home/alumno/Documentos/UTN_C-UTN_H-master/clase_09_init/producto.h
+
+1537479359 source:/home/alumno/Documentos/UTN_C-UTN_H-master/clase_09_init/utn.c
+	<stdio_ext.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"utn.h"
+
+1537481477 source:/home/alumno/Documentos/UTN_C-UTN_H-master/clase_09_init/main.c
+	<stdio_ext.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

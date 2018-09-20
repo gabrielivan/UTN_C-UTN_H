@@ -19,3 +19,12 @@ void producto_mostrarArrayCompleto(Producto arrayProducto[],int size);
 int producto_buscarIndiceArray(Producto arrayProducto[],int size);
 
 int producto_buscarIndiceArrayById(Producto arrayProducto[],int id, int size);
+
+int producto_modificar(Producto arrayProducto[],int indice,int size);
+
+int producto_bajaLogica(Producto arrayProducto[],int indice,int size);
+
+void limpiarPantalla(void);
+
+void pararPantalla();
+

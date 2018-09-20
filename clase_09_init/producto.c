@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
@@ -58,9 +58,14 @@ int producto_mostrarArray(Producto arrayProducto[],int indice,int size)
         printf("\n El nombre del producto es: %s",arrayProducto[indice].nombre);
         printf("\n La descripcion del producto es: %s",arrayProducto[indice].descripcion);
         printf("\n El precio del producto es: %.2f",arrayProducto[indice].precio);
+        printf("\n\n");
 
         retorno = 0;
     }
+
+    __fpurge(stdin);
+    pararPantalla();
+    limpiarPantalla();
     return retorno;
 }
 
@@ -105,4 +110,55 @@ int producto_buscarIndiceArrayById(Producto arrayProducto[],int id, int size)
 }
 
 
+int producto_modificar(Producto arrayProducto[],int indice,int size)
+{
+    char auxNombre[50];
+    float auxPrecio;
+    int retorno = -1;
 
+    if(arrayProducto[indice].isEmpty == 0)
+    {
+        if( !utn_getNombre(auxNombre,50,"\n Ingrese el nuevo nombre: ","\n Error,nombre invalido.",2)&&
+            !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el nuevo precio: ","\n Error,precio invalido.",0,10000,2))
+        {
+            strncpy(arrayProducto[indice].nombre,auxNombre,50);
+            arrayProducto[indice].precio = auxPrecio;
+
+            retorno = 0;
+        }
+
+    }
+    return retorno;
+}
+
+
+int producto_bajaLogica(Producto arrayProducto[],int indice,int size)
+{
+    int retorno = -1;
+
+    if(arrayProducto[indice].isEmpty == 0)
+    {
+        arrayProducto[indice].isEmpty = 1;
+
+        retorno = 0;
+    }
+    else
+    {
+        printf("\nNo hay producto.");
+    }
+
+    return retorno;
+}
+
+void limpiarPantalla(void)
+{
+    //system("cls");
+    system("clear");
+
+}
+
+void pararPantalla()
+{
+    printf("\ningrese una tecla para continuar...");
+    getchar();
+}

@@ -1,4 +1,4 @@
-//#include <stdio_ext.h>
+#include <stdio_ext.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -64,8 +64,8 @@ static int getString(char* pBuffer, int limite)
     int len;
     if(pBuffer != NULL && limite > 0)
     {
-        fflush(stdin);
-        //__fpurge(stdin);
+        //fflush(stdin);
+        __fpurge(stdin);
         fgets(bufferStr,limite,stdin);
         len = strlen(bufferStr);
         if(len != limite-1 ||  bufferStr[limite-2] == '\n')
