@@ -58,3 +58,36 @@
 
 1537492167 /home/profesor/Descargas/clase10_init/pantalla.h
 
+1537556517 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pantalla.h"
+	"utn.h"
+	"producto.h"
+
+1537477884 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.h
+
+1537551583 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1537555558 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"producto.h"
+
+1537554347 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.h
+
+1537477884 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.h
+
+1537554347 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"utn.h"
+

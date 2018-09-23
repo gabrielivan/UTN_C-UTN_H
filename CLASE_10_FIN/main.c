@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utn.h"
-#include "producto.h"
 
-#define CANTIDAD_PRODUCTOS 4
 
 /*
 1)  Definir un tipo de dato que represente un producto.
@@ -47,15 +44,6 @@
 */
 int main()
 {
-    int libre;
-    Producto arrayProductos[CANTIDAD_PRODUCTOS];
-
-    producto_init(arrayProductos,CANTIDAD_PRODUCTOS,1);
-    producto_altaProducto(arrayProductos,CANTIDAD_PRODUCTOS);
-
-    printf("\n---%s",arrayProductos[0].nombre);
-
-    producto_mostrar(arrayProductos,CANTIDAD_PRODUCTOS);
 
     return 0;
 }

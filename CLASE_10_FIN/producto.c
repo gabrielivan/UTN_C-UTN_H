@@ -1,112 +1,162 @@
+//#include <stdio_ext.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
 #include "producto.h"
 
-static int lugarLibre(Producto arrayProducto[],int len);
-static int getNextId();
 
-int producto_init(Producto arrayProducto[],int len,int valor)
+void producto_initArrayProducto(Producto arrayProducto[],int size,int valor)
 {
-    int retorno = -1;
     int i;
-    if(arrayProducto != NULL && len > 0)
+    for(i=0;i < size; i++)
     {
-        for(i=0;i<len;i++)
-        {
-            arrayProducto[i].isEmpty = 1;
-        }
-        retorno = 0;
+        arrayProducto[i].isEmpty = valor;
     }
-    return retorno;
+
 }
 
-int producto_altaProducto(Producto arrayProducto[],int len)
+int producto_altaArray(Producto arrayProducto[],int indice,int size)
 {
-    int retorno = -1;
-    int indice;
     char auxNombre[50];
-    char auxDescripcion[200];
-    float auxPrecio=13.55;
+    char auxDescripcion[100];
+    float auxPrecio;
+    int retorno = -1;
 
-    indice = lugarLibre(arrayProducto,len);
-
-    if( arrayProducto != NULL && len > 0 &&
-        indice >= 0 && indice < len
-        && arrayProducto[indice].isEmpty)
+    if(arrayProducto[indice].isEmpty == 1)
     {
-        if( !utn_getNombre(auxNombre,50,"Nombre producto?\n","nombre no valido\n",2) &&
-            !utn_getNombre(auxDescripcion,200,"Descripcion producto?\n","descrpcion no valido\n",2))
+        if( !utn_getNombre(auxNombre,50,"\n Ingrese el nombre del producto: ","\n Error,nombre invalido.",2)&&
+            !utn_getDescription(auxDescripcion,100,"\n Ingrese la descripcion: ","\n Error,descripcion invalida.",2)&&
+            !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000,2))
         {
             strncpy(arrayProducto[indice].nombre,auxNombre,50);
-            strncpy(arrayProducto[indice].descripcion,auxDescripcion,200);
+            strncpy(arrayProducto[indice].descripcion,auxDescripcion,100);
             arrayProducto[indice].precio = auxPrecio;
             arrayProducto[indice].isEmpty = 0;
-            arrayProducto[indice].idProducto = getNextId();
+            if(indice > 0)
+            {
+                arrayProducto[indice].id =  (arrayProducto[indice - 1].id) + 1;
+            }
+            else
+            {
+                arrayProducto[indice].id =  1;
+            }
+
             retorno = 0;
         }
+
     }
     return retorno;
 }
 
-
-int producto_mostrar(Producto arrayProducto[],int len)
+int producto_mostrarArray(Producto arrayProducto[],int indice,int size)
 {
     int retorno = -1;
-    int i;
-    if(arrayProducto != NULL && len > 0)
+
+    if(arrayProducto != NULL && size > 0 && indice >= 0 && indice < size)
     {
-        for(i=0;i<len;i++)
-        {
-            if(!arrayProducto[i].isEmpty)
-            {
-                printf("\nN: %s - D: %s - P:%f",arrayProducto[i].nombre,arrayProducto[i].descripcion,arrayProducto[i].precio);
-            }
-        }
+        printf("\n El ID del producto es: %d",arrayProducto[indice].id);
+        printf("\n El nombre del producto es: %s",arrayProducto[indice].nombre);
+        printf("\n La descripcion del producto es: %s",arrayProducto[indice].descripcion);
+        printf("\n El precio del producto es: %.2f",arrayProducto[indice].precio);
+        printf("\n\n");
+
         retorno = 0;
     }
+    fflush(stdin);
     return retorno;
 }
 
-
-static int lugarLibre(Producto arrayProducto[],int len)
+void producto_mostrarArrayCompleto(Producto arrayProducto[],int size)
 {
-    int retorno = -1;
-    int i;
-    if(arrayProducto != NULL && len > 0)
+    for(int i  = 0; i < size; i++)
     {
-        for(i=0;i<len;i++)
+        if(!arrayProducto[i].isEmpty)
         {
-            if(arrayProducto[i].isEmpty)
-            {
-                retorno = i;
-                break;
-            }
+            producto_mostrarArray(arrayProducto,i,size);
         }
+    }
+}
+
+int producto_buscarIndiceArray(Producto arrayProducto[],int size)
+{
+    int i;
+
+    for(i=0;i < size; i++)
+    {
+        if(arrayProducto[i].isEmpty == 1)
+        {
+            return i;
+        }
+
+    }
+    return -1;
+}
+
+int producto_buscarIndiceArrayById(Producto arrayProducto[],int id, int size)
+{
+    int i;
+    for(i=0;i < size; i++)
+    {
+        if(arrayProducto[i].id == id)
+        {
+            return i;
+        }
+
+    }
+    return -1;
+}
+
+
+int producto_modificar(Producto arrayProducto[],int indice,int size)
+{
+    char auxNombre[50];
+    float auxPrecio;
+    int retorno = -1;
+
+    if(arrayProducto[indice].isEmpty == 0)
+    {
+        if( !utn_getNombre(auxNombre,50,"\n Ingrese el nuevo nombre: ","\n Error,nombre invalido.",2)&&
+            !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el nuevo precio: ","\n Error,precio invalido.",0,10000,2))
+        {
+            strncpy(arrayProducto[indice].nombre,auxNombre,50);
+            arrayProducto[indice].precio = auxPrecio;
+
+            retorno = 0;
+        }
+
     }
     return retorno;
 }
 
 
-static int getNextId()
+int producto_bajaLogica(Producto arrayProducto[],int indice,int size)
 {
-    static int ultimoId=-1;
-    ultimoId++;
-    return ultimoId;
+    int retorno = -1;
+
+    if(arrayProducto[indice].isEmpty == 0)
+    {
+        arrayProducto[indice].isEmpty = 1;
+
+        retorno = 0;
+    }
+    else
+    {
+        printf("\nNo hay producto.");
+    }
+
+    return retorno;
 }
 
+void limpiarPantalla(void)
+{
+    //system("cls");
+    system("clear");
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+void pararPantalla()
+{
+    printf("\ningrese una tecla para continuar...");
+    getchar();
+}
