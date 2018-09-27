@@ -3,7 +3,6 @@
 #include <string.h>
 #include "pantalla.h"
 #include "utn.h"
-#include "producto.h"
 
 static int getNextId()
 {
@@ -73,7 +72,7 @@ int pantalla_alta(Pantalla* array, int len)
     char nombre[50];
     char direccion[200];
     float precio;
-    //int tipo;
+    int tipo;
 
     indice = getLugarLibre(array,len);
 
@@ -81,10 +80,12 @@ int pantalla_alta(Pantalla* array, int len)
         indice >= 0 && indice < len
         && array[indice].isEmpty)
     {
-        if( !utn_getNombre(nombre,50,"Nombre pantalla?\n","nombre no valido\n",2) &&
+        if( !utn_getNumero(&tipo,"1- cargar LCD \n2- cargar LED","Error, ingrese una opcion valida",1,2,2) &&
+            !utn_getNombre(nombre,50,"Nombre pantalla?\n","nombre no valido\n",2) &&
             !utn_getDescription(direccion,200,"Direccion pantalla?\n","direccion no valida\n",2)&&
             !utn_getNumeroConComa(&precio,"ingrese el precio","Error reingrese el precio",0,10000,2))
         {
+            array[indice].tipo = tipo;
             strncpy(array[indice].nombre,nombre,50);
             strncpy(array[indice].direccion,direccion,200);
             array[indice].precio = precio;
@@ -98,93 +99,120 @@ int pantalla_alta(Pantalla* array, int len)
 
 int pantalla_modificar(Pantalla* array, int len)
 {
+    Pantalla* pantalla;//pantalla a modificar
     char auxNombre[50];
     char auxDireccion[200];
     float auxPrecio;
-    //int tipo;
-    int indice;
-    int auxNumero;
+    int tipo;
+    int idIngresado;
     int retorno = -1;
 
-    indice = utn_getNumero(&auxNumero,"Ingrese el indice de la pantalla a modificar","Error ingrese un numero valido!",0,1000,2);
+    if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a modificar","Error ingrese un ID valido!",0,10000,2) == -1)
+    {
+        return retorno;
+    }
+    pantalla = pantalla_getById(array,len,idIngresado);
+    if(pantalla != NULL)
+    {
+        if(array != NULL && len > 0 &&
+        indice >= 0 && indice < len && !pantalla->isEmpty)
+        {
+              if(!utn_getNumero(&tipo,"1- tipo LCD \n2- tipo LED","Error, ingrese una opcion valida",1,2,2) &&
+                 !utn_getNombre(auxNombre,50,"\n Ingrese el nuevo nombre: ","\n Error,nombre invalido.",2)&&
+                 !utn_getDescription(auxDireccion,200,"Ingrese la nueva direccion","Error direccion invalida",2)&&
+                 !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el nuevo precio: ","\n Error,precio invalido.",0,10000,2))
+             {
+                pantalla->tipo = tipo;
+                strncpy(pantalla->nombre,auxNombre,50);
+                strncpy(pantalla->direccion,auxDireccion,200);
+                pantalla->precio = auxPrecio;
 
-    if(array != NULL && len > 0 &&
-        indice >= 0 && indice < len && array[indice].isEmpty == 0)
-      {
-          if(!utn_getNombre(auxNombre,50,"\n Ingrese el nuevo nombre: ","\n Error,nombre invalido.",2)&&
-             !utn_getDescription(auxDireccion,200,"Ingrese la nueva direccion","Error direccion invalida",2)&&
-             !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el nuevo precio: ","\n Error,precio invalido.",0,10000,2))
-         {
-            strncpy(array[indice].nombre,auxNombre,50);
-            strncpy(array[indice].direccion,auxDireccion,200);
-            array[indice].precio = auxPrecio;
+                retorno = 0;
+             }
 
-            retorno = 0;
-         }
-
-      }
-
+        }
+    }
     return retorno;
 }
 
 int pantalla_baja(Pantalla* array, int len)
 {
+     Pantalla* pantalla;//pantalla a borrar
     int retorno = -1;
     int indice;
     int auxNumero;
 
-    indice = utn_getNumero(&auxNumero,"Ingrese el indice del producto a borrar","Error ingrese un numero valido!",0,1000,2);
-
-    if(array != NULL && len > 0 &&
-        indice >= 0 && indice < len && array[indice].isEmpty == 0)
+  if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a borrar","Error ingrese un ID valido!",0,10000,2) == -1)
     {
-        array[indice].isEmpty = 1;
-
-        retorno = 0;
+        return retorno;
     }
-    else
+    pantalla = pantalla_getById(array,len,idIngresado);
+    if(pantalla != NULL)
     {
-        printf("\nNo hay pantalla.");
-    }
+        if(array != NULL && len > 0 &&
+            indice >= 0 && indice < len && pantalla->isEmpty == 0)//donde declaras el indice???donde lo pide? que es indice?
+        {
+            pantalla->isEmpty = 1;
 
+            retorno = 0;
+        }
+        else
+        {
+            printf("\nNo hay pantalla.");
+        }
+    }
     return retorno;
 }
 
 int pantalla_mostrar(Pantalla* array, int len)
 {
+    Pantalla* pantalla;//pantalla a borrar
     int retorno = -1;
     int indice;
     int auxNumero;
 
-    indice = utn_getNumero(&auxNumero,"Ingrese el indice de la pantalla a mostrar","Error reingrese un indice correcto",0,1000,2);
-
-    if(array != NULL && len > 0 && indice >= 0 && indice < len)
+    if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a mostrar","Error ingrese un ID valido!",0,10000,2) == -1)
     {
-        printf("\n El nombre de la pantalla es: %s",array[indice].nombre);
-        printf("\n La direccion del producto es: %s",array[indice].direccion);
-        printf("\n El precio del producto es: %.2f",array[indice].precio);
-        printf("\n\n");
-
-        retorno = 0;
+        return retorno;
     }
-    fflush(stdin);
-    //__fpurge(stdin);
+    pantalla = pantalla_getById(array,len,idIngresado);
+    if(pantalla != NULL)
+    {
+
+        if(array != NULL && len > 0 )
+        {
+            printf("\n El nombre de la pantalla es: %s",pantalla->nombre);
+            if(pantalla->tipo == 1)
+                printf("\n La pantalla es tipo LCD");
+            else
+                printf("\n La pantalla es tipo LED");
+
+            printf("\n La direccion del pantalla es: %s",pantalla->direccion);
+            printf("\n El precio de la pantalla es: %.2f",pantalla->precio);
+            printf("\n\n");
+
+            retorno = 0;
+        }
+        fflush(stdin);
+        //__fpurge(stdin);
+    }
     return retorno;
 }
 
-/*int pantalla_ordenar(Pantalla* array, int len)
+void pantalla_ordenar(Pantalla* array, int len)
 {
-	int i,j,auxiliar;
-
-	for(i = 1; i < size; i++) {
-		auxiliar = array[i];
-		j = i;
-		while(j > 0 && auxiliar < array[j - 1])
+    int aux;
+	for(int i = 0; i < len -1; i++)
+    {
+        for(int j = i + 1; j < len; j++)
         {
-			array[j] = array[j - 1];
-			j--;
-		}
-		array[j] = auxiliar;
-	}
+            if(array[i].precio > array[j].precio)
+            {
+                aux = array[i];
+                array[i] = array[j];
+                array[j] = aux;
+            }
+        }
+    }
 }
-*/
+
