@@ -115,7 +115,7 @@ int pantalla_modificar(Pantalla* array, int len)
     if(pantalla != NULL)
     {
         if(array != NULL && len > 0 &&
-        indice >= 0 && indice < len && !pantalla->isEmpty)
+        !pantalla->isEmpty)
         {
               if(!utn_getNumero(&tipo,"1- tipo LCD \n2- tipo LED","Error, ingrese una opcion valida",1,2,2) &&
                  !utn_getNombre(auxNombre,50,"\n Ingrese el nuevo nombre: ","\n Error,nombre invalido.",2)&&
@@ -139,8 +139,7 @@ int pantalla_baja(Pantalla* array, int len)
 {
      Pantalla* pantalla;//pantalla a borrar
     int retorno = -1;
-    int indice;
-    int auxNumero;
+    int idIngresado;
 
   if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a borrar","Error ingrese un ID valido!",0,10000,2) == -1)
     {
@@ -150,7 +149,7 @@ int pantalla_baja(Pantalla* array, int len)
     if(pantalla != NULL)
     {
         if(array != NULL && len > 0 &&
-            indice >= 0 && indice < len && pantalla->isEmpty == 0)//donde declaras el indice???donde lo pide? que es indice?
+            pantalla->isEmpty == 0)
         {
             pantalla->isEmpty = 1;
 
@@ -164,55 +163,55 @@ int pantalla_baja(Pantalla* array, int len)
     return retorno;
 }
 
-int pantalla_mostrar(Pantalla* array, int len)
-{
-    Pantalla* pantalla;//pantalla a borrar
-    int retorno = -1;
-    int indice;
-    int auxNumero;
-
-    if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a mostrar","Error ingrese un ID valido!",0,10000,2) == -1)
-    {
-        return retorno;
-    }
-    pantalla = pantalla_getById(array,len,idIngresado);
-    if(pantalla != NULL)
-    {
-
-        if(array != NULL && len > 0 )
-        {
-            printf("\n El nombre de la pantalla es: %s",pantalla->nombre);
-            if(pantalla->tipo == 1)
-                printf("\n La pantalla es tipo LCD");
-            else
-                printf("\n La pantalla es tipo LED");
-
-            printf("\n La direccion del pantalla es: %s",pantalla->direccion);
-            printf("\n El precio de la pantalla es: %.2f",pantalla->precio);
-            printf("\n\n");
-
-            retorno = 0;
-        }
-        fflush(stdin);
-        //__fpurge(stdin);
-    }
-    return retorno;
-}
-
-void pantalla_ordenar(Pantalla* array, int len)
-{
-    int aux;
-	for(int i = 0; i < len -1; i++)
-    {
-        for(int j = i + 1; j < len; j++)
-        {
-            if(array[i].precio > array[j].precio)
-            {
-                aux = array[i];
-                array[i] = array[j];
-                array[j] = aux;
-            }
-        }
-    }
-}
+//int pantalla_mostrar(Pantalla* array, int len)
+//{
+//    Pantalla* pantalla;//pantalla a borrar
+//    int retorno = -1;
+//    int indice;
+//    int auxNumero;
+//
+//    if(utn_getNumero(&idIngresado,"Ingrese el ID de la pantalla a mostrar","Error ingrese un ID valido!",0,10000,2) == -1)
+//    {
+//        return retorno;
+//    }
+//    pantalla = pantalla_getById(array,len,idIngresado);
+//    if(pantalla != NULL)
+//    {
+//
+//        if(array != NULL && len > 0 )
+//        {
+//            printf("\n El nombre de la pantalla es: %s",pantalla->nombre);
+//            if(pantalla->tipo == 1)
+//                printf("\n La pantalla es tipo LCD");
+//            else
+//                printf("\n La pantalla es tipo LED");
+//
+//            printf("\n La direccion del pantalla es: %s",pantalla->direccion);
+//            printf("\n El precio de la pantalla es: %.2f",pantalla->precio);
+//            printf("\n\n");
+//
+//            retorno = 0;
+//        }
+//        fflush(stdin);
+//        //__fpurge(stdin);
+//    }
+//    return retorno;
+//}
+//
+//void pantalla_ordenar(Pantalla* array, int len)
+//{
+//    int aux;
+//	for(int i = 0; i < len -1; i++)
+//    {
+//        for(int j = i + 1; j < len; j++)
+//        {
+//            if(array[i].precio > array[j].precio)
+//            {
+//                aux = array[i];
+//                array[i] = array[j];
+//                array[j] = aux;
+//            }
+//        }
+//    }
+//}
 

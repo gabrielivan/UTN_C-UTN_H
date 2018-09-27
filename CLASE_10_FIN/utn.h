@@ -24,4 +24,10 @@ int utn_getNumero(int* pResultado,
                  int  maximo,
                  int  reintentos);
 
+int utn_getCuit(char* pResultado,
+char mensaje[],
+char mensajeError[],
+int  reintentos);
+
+
 #endif // UTN_H_INCLUDED
