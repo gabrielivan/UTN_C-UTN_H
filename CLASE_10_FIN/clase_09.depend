@@ -58,49 +58,49 @@
 
 1537492167 /home/profesor/Descargas/clase10_init/pantalla.h
 
-1537693598 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.c
+1538143115 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"pantalla.h"
 	"utn.h"
-	"producto.h"
 
-1537801164 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.h
+1538084198 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\pantalla.h
 
-1537693598 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\main.c
+1538157792 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\main.c
 	<stdio.h>
 	<stdlib.h>
-	<string.h>
+	"utn.h"
+	"pantalla.h"
+	"contrataciones.h"
 
-1537693598 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.c
+1538084198 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"utn.h"
 	"producto.h"
 
-1537693598 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.h
+1538084198 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.h
 
-1537801164 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.h
+1538084198 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\producto.h
 
-1537693598 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.c
+1538084198 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\utn.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
 	<ctype.h>
 	"utn.h"
 
-1537805735 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\contrataciones.c
+1538158499 source:c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\contrataciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"pantalla.h"
 	"utn.h"
-	"producto.h"
 	"contrataciones.h"
 
-1537801754 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\contrataciones.h
+1538158061 c:\users\admin\desktop\utn_c-utn_h-master\clase_10_fin\contrataciones.h
 
 1537997412 source:c:\users\chris_x4urr38\desktop\utn_c-utn_h-master\clase_10_fin\main.c
 	<stdio.h>

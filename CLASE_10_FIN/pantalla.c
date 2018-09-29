@@ -4,7 +4,7 @@
 #include "pantalla.h"
 #include "utn.h"
 
-static int getNextId()
+static int getNextId()//anda barbaro !
 {
     static int ultimoId=-1;
     ultimoId++;
@@ -12,7 +12,7 @@ static int getNextId()
 }
 
 
-static int getLugarLibre(Pantalla* array, int len)
+static int getLugarLibre(Pantalla* array, int len)//anda barabaro !
 {
     int retorno = -1;
     int i;
@@ -31,7 +31,7 @@ static int getLugarLibre(Pantalla* array, int len)
 }
 
 
-int pantalla_init(Pantalla* array, int len)
+int pantalla_init(Pantalla* array, int len)//inizialisa todas las pantallas en 1
 {
     int retorno = -1;
     int i;
@@ -46,7 +46,7 @@ int pantalla_init(Pantalla* array, int len)
     return retorno;
 }
 
-Pantalla* pantalla_getById(Pantalla* array, int len,int id)
+Pantalla* pantalla_getById(Pantalla* array, int len,int id)//te trae una pantalla o un null el null te lo retorna cuando no hay una pantalla para retornar. te retorna una pantalla siempre y cuando alla una,es decir que el isEmpty este en 0 y que el id que ingresaron sea igual al id de la pantalla existente.
 {
     Pantalla* retorno = NULL;
     int i;
@@ -54,9 +54,9 @@ Pantalla* pantalla_getById(Pantalla* array, int len,int id)
     {
         for(i=0;i<len;i++)
         {
-            if(!array[i].isEmpty && array[i].id == id)
+            if(!array[i].isEmpty && array[i].id == id)//pregunta si en el array de pantallas que vos le mandaste no esta en empty y el id es igual al id que le mandaron.
             {
-                retorno = &array[i];
+                retorno = &array[i];//te retorna la pantalla entera.
                 break;
             }
         }
@@ -64,7 +64,7 @@ Pantalla* pantalla_getById(Pantalla* array, int len,int id)
     return retorno;
 }
 
-int pantalla_alta(Pantalla* array, int len)
+int pantalla_alta(Pantalla* array, int len)//para dar de alta una pantalla solo se le pide los datos al usuario y ya esta.
 {
     int retorno = -1;
     int indice;
@@ -80,10 +80,10 @@ int pantalla_alta(Pantalla* array, int len)
         indice >= 0 && indice < len
         && array[indice].isEmpty)
     {
-        if( !utn_getNumero(&tipo,"1- cargar LCD \n2- cargar LED","Error, ingrese una opcion valida",1,2,2) &&
-            !utn_getNombre(nombre,50,"Nombre pantalla?\n","nombre no valido\n",2) &&
-            !utn_getDescription(direccion,200,"Direccion pantalla?\n","direccion no valida\n",2)&&
-            !utn_getNumeroConComa(&precio,"ingrese el precio","Error reingrese el precio",0,10000,2))
+        if( !utn_getNumero(&tipo,"1- cargar LCD \n2- cargar LED\n","Error, ingrese una opcion valida",1,2,2) &&
+            !utn_getNombre(nombre,50,"Nombre de la pantalla: ","nombre invalido\n",2) &&
+            !utn_getDescription(direccion,200,"Direccion de la pantalla: ","direccion invalida\n",2)&&
+            !utn_getNumeroConComa(&precio,"ingrese el precio de la pantalla: ","Error reingrese el precio",0,99999,2))
         {
             array[indice].tipo = tipo;
             strncpy(array[indice].nombre,nombre,50);
@@ -97,7 +97,7 @@ int pantalla_alta(Pantalla* array, int len)
     return retorno;
 }
 
-int pantalla_modificar(Pantalla* array, int len)
+int pantalla_modificar(Pantalla* array, int len)//para modificar una pantalla tiene mas pimienta por que primero se le pide el id de la pantalla a modificar,se valida el id y despues a pantalla se le carga una pantalla con el id que ingresaron y despues verificamos que alla una pantalla y si la hay se modifica.
 {
     Pantalla* pantalla;//pantalla a modificar
     char auxNombre[50];
@@ -111,6 +111,7 @@ int pantalla_modificar(Pantalla* array, int len)
     {
         return retorno;
     }
+    //aca te toma el id que este en el rango que le pusiste ... pero no te esta validando que antes de modificar estes modificando un id existente por ejemplo vos pones el 2 en idIngresado.... pero no hay un 2 de id de pantalla solamente esta el 0 y el 1 por que cargaron 2 pantallas que pasa con esto ? que te imprime cualquier cosa.
     pantalla = pantalla_getById(array,len,idIngresado);
     if(pantalla != NULL)
     {
@@ -135,9 +136,9 @@ int pantalla_modificar(Pantalla* array, int len)
     return retorno;
 }
 
-int pantalla_baja(Pantalla* array, int len)
+int pantalla_baja(Pantalla* array, int len)//esto tiene mas pimienta aun que la de modificar por que ?? bueno por que lo que te pide es el id como en todas pero la diferencia es que una pantalla puede tener muchas contrataciones entonces cuando vos la das de baja tenes que dar de baja las contrataciones que tenia esto asi dice el enunciado....
 {
-     Pantalla* pantalla;//pantalla a borrar
+    Pantalla* pantalla;//pantalla a borrar
     int retorno = -1;
     int idIngresado;
 
@@ -145,13 +146,14 @@ int pantalla_baja(Pantalla* array, int len)
     {
         return retorno;
     }
+    //aca te toma el id que este en el rango que le pusiste ... pero no te esta validando que antes de modificar estes modificando un id existente por ejemplo vos pones el 2 en idIngresado.... pero no hay un 2 de id de pantalla solamente esta el 0 y el 1 por que cargaron 2 pantallas que pasa con esto ? que te modifica o borra cualquier cosa.
     pantalla = pantalla_getById(array,len,idIngresado);
     if(pantalla != NULL)
     {
         if(array != NULL && len > 0 &&
             pantalla->isEmpty == 0)
         {
-            pantalla->isEmpty = 1;
+            pantalla->isEmpty = 1;//estas solamente dando de baja la pantalla pero no las contrataciones.....
 
             retorno = 0;
         }
